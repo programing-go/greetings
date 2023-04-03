@@ -3,6 +3,7 @@ package greetings
 import (
     "testing"
     "regexp"
+    "fmt"
 )
 
 // TestHelloName calls greetings.Hello with a name, checking
@@ -31,3 +32,16 @@ func BenchmarkHello(b *testing.B) {
     }
 }
 
+func TestHellos(t *testing.T) {
+    // A slice of names.
+    names := []string{"Gladys", "Samantha", "Darrin"}
+
+    // Request greeting messages for the names.
+    messages, err := Hellos(names)
+    if err != nil {
+        t.Fatalf(`Hellos("%v") = %q, %v, want "", error`, names, messages, err)
+    }
+    // If no error was returned, print the returned map of
+    // messages to the console.
+    fmt.Println(messages)
+}
