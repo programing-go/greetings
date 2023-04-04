@@ -16,6 +16,23 @@ func TestHelloName(t *testing.T) {
     }
 }
 
+func TestHelloNames(t *testing.T) {
+    testCases := []struct {
+		name string
+		want string
+	}{
+		{`Gladys`, "Hi,Gladys.welcome!"},
+		{`Jim`, "Hi,Jim.welcome!"},
+		{`Bob`, "Hi,Bob.welcome!"},
+	}
+    for _, test := range testCases {
+		msg, err := Hello(test.name)
+		if err != nil || test.want != msg {
+			t.Fatalf(`Hello("%s") = %q, %v, want match for %#q, nil`, test.name, msg, err, test.want)
+		}
+	}
+}
+
 // TestHelloEmpty calls greetings.Hello with an empty string,
 // checking for an error.
 func TestHelloEmpty(t *testing.T) {
